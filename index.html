@@ -162,10 +162,10 @@
     <span>Restaurants</span>
     </a>
 
-    <a href="repair.html">
+    <!-- <a href="repair.html">
     <iron-icon icon="maps:local-car-wash"></iron-icon>
     <span>Auto Repair</span>
-    </a>
+    </a> -->
 </paper-menu>
 </paper-submenu>
         
@@ -348,7 +348,7 @@ pubnub.subscribe({
 });
 
 function start() {
-// setInterval(function(){
+setInterval(function(){
 
  console.log(cfuel,ckm,cmilege,speed,temp,rpm);
 var rp4 = radialProgress(document.getElementById('div4'))
@@ -373,7 +373,7 @@ var rp6 = radialProgress(document.getElementById('div6'))
 .render();
 
        
-// }, 2000);
+}, 2000);
 
        var rp1 = radialProgress(document.getElementById('div1'))
                 .label("FUEL (ltrs) ")
