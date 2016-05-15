@@ -1,0 +1,63 @@
+        #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 5px;
+      }
+
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 90%;
+        float: left;
+        width: 100%;
+        position: relative;
+      }
+
+      #right-panel {
+        margin: 20px;
+        border-width: 2px;
+        width: 30%;
+        float: left;
+        text-align: left;
+        padding-top: 20px;
+        position: absolute; top: 10px; left: 10px; z-index: 99;
+      }
+      #directions-panel {
+        margin-top: 20px;
+        /*background-color: #FFEE77;*/
+        padding: 10px;
+      }
+
+      .hidden{
+      display:none;
+      float: left;
+      height: 32px;
+      width: 100px;
+      }
+
+      .reveal{
+      display:block;
+      /*position:absolute;*/
+      }
+    
+    .btn{
+        display: block;
+        float: right;
+        height: 20px;
+        margin: -1px -2px -2px;
+        width: 41px;
+    }

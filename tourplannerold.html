@@ -1,0 +1,274 @@
+<html lang>
+  <head>
+    <meta charset=utf-8>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <meta name=description content>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <title>planmytrip</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="bower_components/paper-menu/paper-menu.html">
+
+    <link rel=apple-touch-icon href=apple-touch-icon.png>
+    <link href="../fonts.googleapis.com/cssb4b5.css?family=Roboto:400,100,300,300italic,400italic,500,500italic,700,900" rel=stylesheet type=text/css>
+    <link href="../fonts.googleapis.com/icone91f.css?family=Material+Icons" rel=stylesheet>
+    <link rel=stylesheet href=assets/css/style.min.css title=main>
+  </head>
+  <body>
+  
+    <!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+    <div class="mdl-layout mdl-js-layout "> 
+    <!-- mdl-layout--overlay-drawer-button mdl-layout--fixed-header -->
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+     
+
+      <!--   <div class="mdl-layout__header-row">
+          <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+             <a class=mdl-navigation__link href=homepage.html>Home
+            </a> 
+            <a class=mdl-navigation__link href=shop.html>Tourpackages
+            </a> 
+           
+            <a class=mdl-navigation__link href="https://www.payumoney.com/paybypayumoney/#/119303">Online payment
+            </a> 
+            <a class=mdl-navigation__link href=feedback.html>Feedback
+            </a> 
+            <a class=mdl-navigation__link href=contact.html>Contact Us
+            </a>
+          </nav>
+        </div> -->
+         <!-- </header> -->
+      <!-- </header> -->
+     <div class=mdl-layout__drawer>
+        <a class=mdl-layout-title href=homepage.html>
+          <img src=assets/images/logo-dark.png alt=FAB!>
+        </a>
+        <nav class=mdl-navigation>
+          <a class="mdl-navigation__link" href=homepage.html>
+            <i class="material-icons mdl-navigation__icon"></i> Homepage
+          </a> 
+
+          <a class="mdl-navigation__link" href=tourplanner.html>
+            <i class="material-icons mdl-navigation__icon"></i> Tourplanner
+          </a> 
+<!-- 
+          <a class="mdl-navigation__link" href=>
+            <i class="material-icons mdl-navigation__icon"></i> Tourpackages
+          </a>  -->
+           <a class="mdl-navigation__link mdl-navigation__link--submenu" href=shop.html>Tourpackages</a>
+          <nav class="mdl-navigation mdl-navigation__submenu">
+            <a class="mdl-navigation__link mdl-navigation__submenu__link" href=shop.html>Basic packages
+            </a>
+            <a class="mdl-navigation__link mdl-navigation__submenu__link" href=shop-page2.html>Premium packages</a>
+          </nav> 
+
+          <span class="mdl-navigation__link-divider">
+          </span> 
+          
+          <a class="mdl-navigation__link" href=https://www.payumoney.com/paybypayumoney/#/119303>
+            <i class="material-icons mdl-navigation__icon">
+            </i>Online payment
+          </a> 
+          
+          <a class="mdl-navigation__link" href=feedback.html>
+            <i class="material-icons mdl-navigation__icon">
+            </i> Feedback
+          </a>
+
+          <a class="mdl-navigation__link" href=contact.html>
+            <i class="material-icons mdl-navigation__icon"></i>Contact-us
+          </a> 
+        </nav>
+      </div>
+
+      <main class=mdl-layout__content>
+
+       <!-- --------END OF YELLOW COLOUR SECTION-------- -->
+
+        <div class=oxy-section>
+    <div id="map"></div>
+    <section onclick="clickHandler(event)">
+    <div id="right-panel">
+    <div>
+    
+    <paper-input type="text" label="Start:" id="start"></paper-input><!-- getting starting poin t frm user -->
+   
+    <!-- <paper-input type="text" id="waypoints"> -->
+  <!--   <select multiple id="waypoints">
+      <option value="trichy">trichy</option>
+      <option value="theni">theni</option>
+      <option value="ooty">ooty</option>
+
+    </select> -->
+   <paper-input type="text" id="waypoint1" label="waypoint 1"></paper-input>
+   <paper-input type="text" id="waypoint2" label="waypoint 2"></paper-input>
+   <paper-input type="text" id="waypoint3" label="waypoint 3"></paper-input>
+   <!-- <button onclick="showcard();">Add</button> -->
+   <paper-input type="text" id="end" label="End"> </paper-input> <!-- getting dest. from user -->
+      <paper-input type="date" label="pickup date"></paper-input>
+
+     <paper-button raised data-dialog="actions" type="submit" id="submit">Submit</paper-button >
+    </div>
+   <!-- <div id="direction-panel"></div> -->
+    </div>
+<paper-dialog id="actions">
+   <h2>plan!!!</h2>
+   
+   <div id="direction-panel"></div>
+   <p id="bill"></p>
+   <p id="note"></p>
+  <!--  <div class="buttons">
+        <paper-button >More Info...</paper-button>
+        <paper-button dialog-dismiss>Decline</paper-button>
+        <paper-button dialog-confirm autofocus>Accept</paper-button>
+      </div> -->
+      <!-- PayU checkout-->
+     <div class="pm-button"><a href="https://www.payumoney.com/paybypayumoney/#/119303"><img src="https://www.payumoney.com//media/images/payby_payumoney/buttons/131.png" /></a></div>
+
+   </paper-dialog>
+   </section>
+   </div>
+   </main>
+  <!--   <paper-dialog>
+  <h2>Header</h2>
+  <paper-dialog-scrollable>
+    Lorem ipsum...
+  </paper-dialog-scrollable>
+  <div class="buttons">
+    <paper-button dialog-dismiss>Cancel</paper-button>
+    <paper-button dialog-confirm>Accept</paper-button>
+  </div>
+</paper-dialog> -->
+<script>
+    function clickHandler(e) {
+      var button = e.target;
+      while (!button.hasAttribute('data-dialog') && button !== document.body) {
+        button = button.parentElement;
+      }
+      if (!button.hasAttribute('data-dialog')) {
+        return;
+      }
+      var id = button.getAttribute('data-dialog');
+      var dialog = document.getElementById(id);
+      if (dialog) {
+        dialog.open();
+      }
+    }
+  </script>
+    <script>
+    // function showcard(){document.getElementById("waypoint2").className="reveal";}
+      function planmytrip() {
+        var directionsService = new google.maps.DirectionsService;
+
+        // FOR AUTOCOMPLETE SUGGESTION !!!!
+        google.maps.event.addDomListener(window, 'load', function () {
+            new google.maps.places.SearchBox(document.getElementById('start'));
+            new google.maps.places.SearchBox(document.getElementById('waypoint1'));
+            new google.maps.places.SearchBox(document.getElementById('waypoint2'));
+            new google.maps.places.SearchBox(document.getElementById('waypoint3'));
+            new google.maps.places.SearchBox(document.getElementById('end'));
+
+
+        });  
+
+        var directionsDisplay = new google.maps.DirectionsRenderer({'draggable': true });
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: {lat: 11.0183, lng: 76.9725}                        // renders maps center view...hav to change to coimbatore center
+        });
+        directionsDisplay.setMap(map);
+
+        document.getElementById('submit').addEventListener('click', function() {
+          calculateAndDisplayRoute(directionsService, directionsDisplay);
+        });
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        
+        var waypts = [];  // consits of the ways the user trespasses
+
+        if(document.getElementById('waypoint1').value!=0)
+          {
+        var checkboxArray = document.getElementById('waypoint1');
+            waypts.push({
+              location: checkboxArray.value,
+              stopover: true
+            });
+             }
+
+            if(document.getElementById('waypoint2').value!=0)
+          {
+            checkboxArray = document.getElementById('waypoint2');
+            waypts.push({
+              location: checkboxArray.value,
+              stopover: true
+            });
+          }
+
+          if(document.getElementById('waypoint3').value!=0)
+          {
+            checkboxArray = document.getElementById('waypoint3');
+            waypts.push({
+              location: checkboxArray.value,
+              stopover: true
+            });
+          }
+ 
+
+        // var checkboxArray = document.getElementById('waypoints');
+        // for (var i = 0; i < checkboxArray.length; i++) {
+        //   if (checkboxArray.options[i].selected) {
+        //     waypts.push({
+        //       location: checkboxArray[i].value,
+        //       stopover: true
+        //     });
+        //   }
+        // }
+        console.log(waypts);
+
+        directionsService.route({
+          origin: document.getElementById('start').value,
+          destination: document.getElementById('end').value,
+          waypoints: waypts,
+          optimizeWaypoints: false,
+          travelMode: google.maps.TravelMode.DRIVING
+        }, function(response, status) {
+          if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            var details = document.getElementById('direction-panel'); // to return details !!!
+            details.innerHTML = '';
+            // For each route, display summary information.
+            var totaldistance =0;
+            var totalamount=0;
+            for (var i = 0; i < route.legs.length; i++) {
+              var routeSegment = i + 1;
+              details.innerHTML += '<b>Total kms of route : ' + routeSegment +
+                  '</b><br>';
+              details.innerHTML += route.legs[i].start_address + ' to ';
+              details.innerHTML += route.legs[i].end_address + '<br>';
+              details.innerHTML += route.legs[i].distance.text + '<br><br>';
+             totaldistance = totaldistance+route.legs[i].distance.value;
+            }
+console.log(totaldistance=totaldistance/1000);
+document.getElementById('bill').innerHTML='Total distance is ' +totaldistance+' Kms';
+totalamount=totaldistance*5;
+document.getElementById('note').innerHTML='<b>Please pay Rs. ' + Math.round(totalamount) +' at checkout </b>';
+
+           } else {
+            window.alert('Directions request failed due to ' + status);  // adding exception from server
+          }
+        });
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=planmytrip&libraries=places"></script>
+  </body>
+</html>

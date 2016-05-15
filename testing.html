@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang>
+  <head>
+    <meta charset=utf-8>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <meta name=description content>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+        <title>planmytrip</title>
+    <link rel=apple-touch-icon href=apple-touch-icon.png>
+    <link href="../fonts.googleapis.com/cssb4b5.css?family=Roboto:400,100,300,300italic,400italic,500,500italic,700,900" rel=stylesheet type=text/css>
+    <link href="../fonts.googleapis.com/icone91f.css?family=Material+Icons" rel=stylesheet>
+    <link rel=stylesheet href=assets/css/style.min.css title=main>
+    <link rel="import" href="./bower_components/polymer/polymer.html">
+    <link rel="import" href="./bower_components/paper-button/paper-button.html">
+    <link rel="import" href="./bower_components/paper-input/paper-input.html">
+    <link rel="import" href="./bower_components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="./bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="./bower_components/iron-form/iron-form.html">
+    <link rel="import" href="./bower_components/iron-ajax/iron-ajax.html">
+    <link rel="import" href="./bower_components/iron-ajax/iron-request.html">
+    <link rel="import" href="./bower_components/firebase-element/firebase-collection.html">
+    <link rel="import" href="./bower_components/firebase-element/firebase-document.html">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+    <div class="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button mdl-layout--fixed-header">
+      <header class="mdl-layout__header mdl-layout__header--waterfall oxy-layout__header">
+      </header>
+         <div class=mdl-layout__drawer>
+        <a class=mdl-layout-title href=homepage.html>
+          <img src=assets/images/logo-dark.png alt=FAB!>
+        </a>
+        <nav class=mdl-navigation>
+          <a class="mdl-navigation__link" href=homepage.html>
+            <i class="material-icons mdl-navigation__icon"></i> Homepage
+          </a> 
+
+          <a class="mdl-navigation__link" href=tourplanner.html>
+            <i class="material-icons mdl-navigation__icon"></i> Tourplanner
+          </a> 
+<!-- 
+          <a class="mdl-navigation__link" href=>
+            <i class="material-icons mdl-navigation__icon"></i> Tourpackages
+          </a>  -->
+           <a class="mdl-navigation__link mdl-navigation__link--submenu" href=shop.html>Tourpackages</a>
+          <nav class="mdl-navigation mdl-navigation__submenu">
+            <a class="mdl-navigation__link mdl-navigation__submenu__link" href=shop.html>Basic packages
+            </a>
+            <a class="mdl-navigation__link mdl-navigation__submenu__link" href=shop-page2.html>Premium packages</a>
+          </nav> 
+
+          <span class="mdl-navigation__link-divider">
+          </span> 
+          
+          <a class="mdl-navigation__link" href=https://www.payumoney.com/paybypayumoney/#/119303>
+            <i class="material-icons mdl-navigation__icon">
+            </i>Online payment
+          </a> 
+          
+          <a class="mdl-navigation__link" href=feedback.html>
+            <i class="material-icons mdl-navigation__icon">
+            </i> Feedback
+          </a>
+
+          <a class="mdl-navigation__link" href=contact.html>
+            <i class="material-icons mdl-navigation__icon"></i>Contact-us
+          </a> 
+        </nav>
+      </div>
+
+      <main class=mdl-layout__content>
+       
+        <div class=oxy-section>
+          <div class=oxy-section__content>
+            <div class="mdl-grid mdl-grid--no-spacing">
+              <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone oxy-animation" data-os-animation=fadeIn data-os-animation-delay=0.1s>
+                <div class=google-map id="map" style=height:450px>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class=oxy-section>
+          <div class=oxy-section__overlay>
+          </div>
+          <div class=oxy-section__content>
+            <div class="mdl-grid mdl-grid--no-fullwidth">
+              <div class="mdl-cell mdl-cell--12-col">
+                <h2 class="mdl-typography--display-1 mdl-typography--text-center mdl-typography--font-light oxy-margin-top-40 oxy-margin-bottom-20 oxy-animation" data-os-animation=fadeIn data-os-animation-delay=0.1s>Get in touch!
+                </h2>
+                <div class="oxy-divider oxy-divider--center oxy-animation" data-os-animation=fadeIn data-os-animation-delay=0.2s>
+                  <div class=oxy-divider__border>
+                  </div>
+                </div>
+              </div>
+            </div>
+<!-- method1 FOMSPREE -->
+
+        <!-- <form action="https://formspree.io/arangates@gmail.com"
+        method="POST">
+        <input type="text" name="name">
+        <input type="email" name="_replyto">
+        <input type="submit" value="Send">
+        </form> -->
+
+<!-- METHOD 2 GOOGLE SCRIPTS -->
+    <!--  <form id="gform" method="POST" class="pure-form pure-form-stacked"
+      action="https://script.google.com/macros/s/AKfycbxUeV9L9mx5HV8YaoQotdQ3dH5o_CkdI6VlBHzJqDiHodauUNc/exec">
+
+        <fieldset class="pure-group">
+          <label for="name">Name: </label>
+          <input id="name" name="name" placeholder="What your Mom calls you" />
+        </fieldset>
+
+        <fieldset class="pure-group">
+          <label for="message">Message: </label>
+          <textarea id="message" name="message" rows="10"
+          placeholder="Tell us what's on your mind..."></textarea>
+        </fieldset>
+
+        <fieldset class="pure-group">
+          <label for="email"><em>Your</em> Email Address:</label>
+          <input id="email" name="email" type="email" value=""
+          required placeholder="your.name@email.com"/>
+          <span id="email-invalid" style="visibility:hidden">
+            Must be a valid email address</span>
+        </fieldset>
+
+        <fieldset class="pure-group">
+          <label for="color">Favourite Color: </label>
+          <input id="color" name="color" placeholder="green" />
+        </fieldset>
+
+        <button class="button-success pure-button button-xlarge">
+          <i class="fa fa-paper-plane"></i>&nbsp;Send</button>
+
+      </form> -->
+      <!-- METHOD3 FIREBASE LOG -->
+
+            <form is="iron-form" id="form" method="post" action="javascript"  class="contact-form oxy-margin-top-80 mdl-typography--text-center">
+              <div class="mdl-grid mdl-grid--no-fullwidth">
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                </div>
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                    <label class=mdl-textfield__label for=name>Your name
+                    </label> 
+                    <input class=mdl-textfield__input name=name type=text id=name>
+                  </div>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                    <label class=mdl-textfield__label for=email>Your email
+                    </label> 
+                    <input class=mdl-textfield__input name=email type=text id=email>
+                  </div>
+                </div>
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                </div>
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                </div>
+                <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--full-width">
+                    <label class=mdl-textfield__label for=message>Your message
+                    </label> 
+                    <textarea class="mdl-textfield__input" type="text" name="message" id="message"></textarea>
+                  </div>
+                  <button type="submit" onclick="submitHandler(event)" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--raised mdl-js-ripple-effect mdl-button--accent oxy-margin-bottom-10">Send Email
+                  </button>
+                  <div class="oxy-margin-top-40 oxy-margin-bottom-80">
+                    <a href=# class="mdl-button mdl-js-button mdl-button--icon">
+                      <i class="fa fa-facebook" style="color: #3b5998;">
+                      </i>
+                    </a> 
+                    <a href=# class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary">
+                      <i class="fa fa-twitter" style="color: #00aced;">
+                      </i>
+                    </a> 
+                    <a href=# class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary">
+                      <i class="fa fa-flickr" style="color: #ff0084;">
+                      </i>
+                    </a> 
+                    <a href=# class="mdl-button mdl-js-button mdl-button--icon mdl-button--primary">
+                      <i class="fa fa-linkedin" style="color: #007bb5;">
+                      </i>
+                    </a>
+                  </div>
+            
+                  <div class=oxy-messages>
+                  </div>
+                </div>
+              </div>
+            </form>
+               <!-- PRODUCT INFO -->
+                <!-- <paper-material elevation=2>
+                          
+    <form is="iron-form" id="form" method="post" action="javascript">       
+      <h2>Enter inventory stock :</h2>                               
+      <paper-input name="stock" label="Stock Available" type="number" required></paper-input>
+      <br>
+       <h2>Raw materials Stock:</h2>
+      <paper-input name="r1_fabric" label="Fabric Available(Kg)" type="number" required></paper-input>
+      <paper-input name="r1_die" label="Die Available(Ltr)" type="number" required></paper-input>
+      <paper-input name="r1_fragrance" label="Fragrance(Ltr)" type="number" required></paper-input>
+
+     
+      <paper-button raised onclick="submitHandler(event)">Send Email</paper-button>
+      
+      <paper-button raised onclick="resetHandler(event)">Reset</paper-button>
+  </form> -->
+    <script>
+                
+              
+                function submitHandler(event)
+                {
+                  var firebaseRef = new Firebase("https://planmitrip.firebaseio.com/contact");
+                  firebaseRef.push(form.serialize());
+                  event.preventDefault();
+                }
+                   </script>
+   </paper-material>
+
+          </div>
+        </div>
+        <div class=oxy-section>
+          <div class="oxy-section__background oxy-section__background--bottom-align oxy-background-parallax">
+            <img src=assets/images/backgrounds/bg8-notinclude.jpg alt="section background">
+          </div>
+          <div class=oxy-section__content>
+          
+            <div class="mdl-grid mdl-grid--no-fullwidth">
+              <div class="mdl-cell mdl-cell--6-col">
+              </div>
+              <div class="mdl-cell mdl-cell--3-col oxy-animation oxy-color-light oxy-margin-top-30 oxy-margin-bottom-30" data-os-animation=fadeIn data-os-animation-delay=0.2s>
+                <h4 class=mdl-typography--title>PlanmiTrip
+                </h4>
+                <p>Near jaya bakes 
+                </p>
+                <p>Coimbatore
+                </p>
+                <p>Tamil Nadu 641044
+                </p>
+                <p>(91)9042299088 
+                </p>
+              </div>
+              <div class="mdl-cell mdl-cell--3-col oxy-animation oxy-color-light oxy-margin-top-30 oxy-margin-bottom-30" data-os-animation=fadeIn data-os-animation-delay=0.2s>
+                <h4 class=mdl-typography--title>Hours
+                </h4>
+                <p>Mon 9:30AM-8:00PM
+                </p>
+                <p>Tue 9:30AM-8:00PM
+                </p>
+                <p>Wed 9:30AM-8:00PM
+                </p>
+                <p>Thu 9:30AM-8:00PM
+                </p>
+                <p>Fri 9:30AM-8:00PM
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+       <footer class="mdl-mega-footer oxy-color-primary">
+          <div class=mdl-mega-footer--middle-section>
+            <div class=mdl-mega-footer--drop-down-section>
+              <input class=mdl-mega-footer--heading-checkbox type=checkbox checked>
+              <h1 class=mdl-mega-footer--heading>About Planmitrip
+              </h1>
+              <div class=mdl-mega-footer__widget>
+                <p>PlanmiTrip is committed to provide the best of Tour Cab services and enabling travellers to plan and book the perfect trip everyday,everywhere. 
+                </p>
+                <p>Today, Planmitrip is much more than just a travel portal or a famous pioneering brand - it is a one-stop-travel-shop that offers the broadest selection of travel products and services in India.
+                </p>
+              </div>
+            <!--   <div class=mdl-mega-footer__widget>
+                <i class="fa fa-cc-mastercard">
+                </i>
+                <i class="fa fa-cc-visa">
+                </i> 
+             
+              </div> -->
+            </div>
+            <div class=mdl-mega-footer--drop-down-section>
+              <input class=mdl-mega-footer--heading-checkbox type=checkbox checked>
+              <h1 class=mdl-mega-footer--heading>PlanMiTrip’s Services:
+              </h1>
+              <ul class="mdl-mega-footer--link-list mdl-mega-footer--link-list--bordered">
+              <li>Tour Cab bookings                 
+              </li>
+                <li>International and Domestic Air Tickets, Holiday Packages and Hotels
+                </li>
+                <li>Domestic Bus and Rail Tickets
+                </li>
+                <li>Private Car and Taxi Rentals
+                </li>
+                <li>B2B and Affiliate Services
+                </li>
+              </ul>
+            </div>
+            <div class=mdl-mega-footer--drop-down-section>
+              <input class=mdl-mega-footer--heading-checkbox type=checkbox checked>
+              <h1 class=mdl-mega-footer--heading>Latest Deals
+              </h1>
+              <div class=mdl-mega-footer__widget>
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-4-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-2-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-3-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-4-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-5-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-2-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+               <!--    <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-7-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-8-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-9-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-13-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-11-b-small-notinclude.jpg alt="product thumbnail">
+                </a> 
+                <a href=single-product.html>
+                  <img width=60 class="oxy-margin-bottom-10 oxy-margin-right-10" src=assets/images/products/product-12-b-small-notinclude.jpg alt="product thumbnail">
+                </a> -->
+              </div>
+            </div>
+            <div class=mdl-mega-footer--drop-down-section>
+              <input class=mdl-mega-footer--heading-checkbox type=checkbox checked>
+              <h1 class=mdl-mega-footer--heading>Our Store
+              </h1>
+              <div class=mdl-mega-footer__widget>
+                <p>Contact us any time, we would love to hear from you.
+                </p>
+                <p>Bharathiar Road,Sidhapudhur
+                  <br>Coimbatore
+                  <br>Tamilnadu-641044
+                  <br>9042299088
+                  <br>
+                </p>
+                <p>
+                  <a href="http://coimbatoretaxis.com">coimbatoretaxis.com</a>
+                  <br>
+                  <a href="mailto:planmitrip@gmail.com">planmitrip@gmail.com</a>
+
+                </p>
+                <p>
+                  <a href="http://facebook.com" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="fa fa-facebook">
+                    </i>
+                  </a> 
+                  <a href="http://twitter.com" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="fa fa-twitter">
+                    </i>
+                  </a> 
+                  <a href="http://flickr.com" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="fa fa-flickr">
+                    </i>
+                  </a> 
+                  <a href="http://coimbatoretaxis.com" class="mdl-button mdl-js-button mdl-button--icon">
+                    <i class="fa fa-linkedin">
+                    </i>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    
+    <div id=side-cart-obfuscator class=mdl-layout__obfuscator>
+    </div>
+    <script>
+      (function(b,o,i,l,e,r){
+        b.GoogleAnalyticsObject=l;
+        b[l]||(b[l]=
+               function(){
+          (b[l].q=b[l].q||[]).push(arguments)}
+              );
+        b[l].l=+new Date;
+        e=o.createElement(i);
+        r=o.getElementsByTagName(i)[0];
+        e.src='../www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}
+       (window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');
+      ga('send','pageview');
+    </script>
+    <script src=assets/js/theme.min.js>
+    </script>
+    <script src=assets/js/contact.min.js>
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false">
+    </script>
+    <script>
+      window.map = {
+        map_type: 'ROADMAP',
+        map_zoom: 15,
+        map_style: 'regular',
+        map_scrollable: 'on',
+        marker: 'show',
+        label: ['Planmitrip,Near jaya bakes First Floor,Coimbatore, Tamil Nadu 641044,India'],
+        address: ['Near jaya bakes First Floor,Coimbatore, Tamil Nadu 641044,India'],
+        latlng : ['11.0193351, 76.9759142'],
+        center_latlng: '',
+        markerURL: 'assets/images/marker.png',
+        auto_center: true
+      };
+    </script>
+  </body>
+</html>

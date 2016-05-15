@@ -1,0 +1,949 @@
+  <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> -->
+  <meta name="generator" content="Polymer Starter Kit">
+  <title>Tourplanner</title>
+
+  <!-- Place favicon.ico in the `app/` directory -->
+
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#E91E63">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Tile color for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="PSK">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+   <link rel="stylesheet" href="assets/css/style.min.css" title="main">
+
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+ 
+
+
+  <!-- endbuild -->
+
+  <!-- Because this project uses vulcanize this should be your only html import
+       in this file. All other imports should go in elements.html -->
+  <link rel="import" href="elements/elements.html">
+
+  <!-- <link rel="import" href="dark-side/dark-side.html"> -->
+
+  <!-- For shared styles, shared-styles.html import in elements.html -->
+  <style is="custom-style" include="shared-styles"></style>
+
+</head>
+
+<body unresolved>
+  <span id="browser-sync-binding"></span>
+  <template is="dom-bind" id="app">
+    <paper-drawer-panel id="paperDrawerPanel" responsive-width="1500px">
+      <!-- Drawer Scroll Header Panel -->
+      <paper-scroll-header-panel drawer fixed>
+
+        <!-- Drawer Toolbar -->
+       <!--  <paper-toolbar id="drawerToolbar">
+          <span class="menu-name">Menu</span>
+
+        </paper-toolbar> -->
+
+        <!-- Drawer Content -->
+        <paper-menu >
+          <!-- <a data-route="home" href="{{baseUrl}}"> -->
+          <a class="mdl-layout-title" href="homepage.html">
+          <img src="assets/images/logo-dark.png" alt=FAB!>
+        </a>
+          <a href="homepage.html">
+            <!-- <iron-icon icon="home"></iron-icon> -->
+            &nbsp; &nbsp;<span>Home</span>
+          </a>
+
+          <!-- <a data-route="users" href="{{baseUrl}}users"> -->
+          <a href="tourplanner.html">
+            <!-- <iron-icon icon="info"></iron-icon> -->
+           &nbsp; &nbsp; <span>Tourplanner</span>
+          </a>
+          <a href="shop.html">
+            <!-- <iron-icon icon="info"></iron-icon> -->
+          &nbsp; &nbsp;  <span>Tour Packages</span>
+          </a>
+          <a href="feedback.html">
+            <!-- <iron-icon icon="info"></iron-icon> -->
+          &nbsp; &nbsp;  <span>Feedback</span>
+          </a>
+          <!-- <a data-route="contact" href="{{baseUrl}}contact"> -->
+          <a href="contact.html">
+            <!-- <iron-icon icon="mail"></iron-icon> -->
+            &nbsp; &nbsp;<span>Contact</span>
+          </a>
+        </paper-menu>
+      </paper-scroll-header-panel>
+
+      <!-- Main Area -->
+      <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+        <!-- Main Toolbar -->
+        <paper-toolbar id="mainToolbar" class="tall">
+          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+
+          <span class="space"></span>
+
+          <!-- Toolbar icons -->
+   <!--        <paper-icon-button icon="refresh"></paper-icon-button>
+          <paper-icon-button icon="search"></paper-icon-button> -->
+
+          <!-- Application name -->
+          <div class="middle middle-container">
+            <div class="app-name">Planmitrip</div>
+          </div>
+
+          <!-- Application sub title -->
+          <div class="bottom bottom-container">
+            <div class="bottom-title">Personalize your plan </div>
+          </div>
+        </paper-toolbar>
+
+        <!-- Main Content -->
+           <!-- <main class=mdl-layout__content> -->
+<section>
+
+<paper-toolbar>
+<paper-tabs selected="{{selected}}" autoselect id="wave" noink  style="width: 650px;" >
+  <paper-tab><iron-icon icon="flag"></iron-icon>Make plan</paper-tab>
+  <paper-tab><iron-icon icon="room"></iron-icon>map view</paper-tab>
+  <paper-tab><iron-icon icon="send"></iron-icon>Checkout</paper-tab>
+  <!-- <paper-tab><iron-icon icon="description"></iron-icon>Summary</paper-tab> -->
+</paper-tabs>
+</paper-toolbar>
+
+<iron-pages selected="{{selected}}" id="planpage">
+<!-- make plan -->
+
+<div>
+<paper-material>
+ Select trip type :
+<paper-radio-group>
+<paper-radio-button onclick="triptype();" id="isone" name="oneway">One way</paper-radio-button>
+<paper-radio-button onclick="triptype();" id="isround" name="round">Round trip</paper-radio-button>
+</paper-radio-group>
+<br>
+</paper-material>
+<paper-material elevation="1">
+Select Vehicle:
+<!--<paper-dropdown-menu id="carpref" label="Select Vehicle">
+  <paper-listbox class="dropdown-content" selected="1">
+    <paper-item>indica</paper-item>
+    <paper-item>maruthi</paper-item>
+    <paper-item>toyota</paper-item>
+    <paper-item>zen</paper-item>
+  </paper-listbox>
+</paper-dropdown-menu>
+<!-- <div class="mdl-selectfield mdl-js-selectfield" tabindex="-1"> -->
+    <select name="orderby" id="carpref" class="mdl-selectfield__select" onchange="getit()" label="pick car">
+        <option value="0"></option>
+        <option value="5">INDICA Non A/c</option>
+
+        <option value="6">INDICA A/c </option>
+        <option value="7">INDIGO A/c</option>
+        <option value="7">LOGAN A/c</option>
+        <option value="7">SWIFT DZIRE A/c</option>
+        <option value="7" >TOYOTA ETIOS A/c</option>
+        <option value="8">TAVERA Non A/c</option>
+        <option value="9">TAVERA A/c</option>
+        <option value="10">MAHINDRA XYLO A/c</option>
+        <option value="12">INNOVA A/c</option>
+        <option value="18">TRAVELLER Non A/c</option>
+        <option value="20">TRAVELLER A/c</option>
+        <option value="25">MAZDA Non A/c - 18 Seater</option>
+        <option value="30">COACH Non A/c - 20 Seater</option>
+    </select>
+<!-- </div> -->
+</paper-material>
+<!-- trip1 -->
+<paper-material elevation="1">
+<paper-input type="text" label="Start:" required auto-validate error-message="needs some text!" change="{{end1::input}}"  id="start">
+<iron-icon icon="communication:location-on" suffix></iron-icon>
+</paper-input>
+<paper-input type="text" label="End:"  required auto-validate error-message="needs some text!" id="end" >
+    <iron-icon icon="image:landscape" suffix></iron-icon>
+    </paper-input> 
+   <vaadin-date-picker label="Pick a date:"  id="date1" required ></vaadin-date-picker>
+</paper-material>
+
+<script type="text/javascript">
+function triptype() {
+    if (document.getElementById('isround').focused) {
+        document.getElementById('addbutton').style.display = 'block';
+    }
+    if (document.getElementById('isone').focused) {
+      // document.getElementById('waypoint1').id = 'end';   
+      // document.getElementById('end').id = 'waypoint1';   
+        document.getElementById('roundtrip').style.display = 'none';                    
+        document.getElementById('addbutton').style.display = 'none';
+    }
+
+}
+</script>
+
+<style>
+  .yellow-button {
+    text-transform: none;
+    color: #eeff41;
+  }
+</style>
+<!-- hidden section of make trip-->
+<div id="addbutton" style="display:none">
+
+   <!-- <button onclick="showcard();">Add</button> -->
+   <!-- getting dest. from user -->
+<paper-fab id="adding" style="float:left; left:10px; bottom:10px;" onclick="roundtrip.style.display = 'block';addbutton.style.display = 'none';adding.style.display = 'none';" icon="add" title="Add destinations"></paper-fab>
+
+</div>
+
+<div id="roundtrip" style="display:none">
+
+<paper-material elevation="1">
+   <!-- change -->
+     <paper-input type="text"  value="[[end1]]" label="Start:"  id=""></paper-input>
+     <paper-input type="text" id="waypoint1" value="{{end2::input}}" label="Add location">
+<iron-icon icon="maps:add-location" suffix></iron-icon>
+     </paper-input>
+
+      <vaadin-date-picker id="date2" label="Pick a date:"></vaadin-date-picker>
+</paper-material>
+<br>
+<br>
+<br>
+    <paper-material elevation="1">
+       <!-- input -->
+     <paper-input type="text"  value="{{end2}}" label="Start:"  id=""></paper-input>
+ <paper-input type="text" id="waypoint2"  value="{{end3::input}}" label="Add location">
+<iron-icon icon="maps:add-location" suffix></iron-icon>
+ </paper-input>
+    <vaadin-date-picker id="date3" label="Pick a date:"></vaadin-date-picker>
+   </paper-material>
+
+   <paper-material elevation="1">
+   <!-- input -->
+     <paper-input type="text"  value="{{end3}}" label="Start:"  id=""></paper-input> 
+   <paper-input type="text" id="waypoint3" label="Add location">
+<iron-icon icon="maps:add-location" suffix></iron-icon>
+   </paper-input>
+
+   <vaadin-date-picker id="date3" label="Pick a date:"></vaadin-date-picker>
+fab
+   </paper-material>
+   <!-- <button onclick="showcard();">Add</button> -->
+   <!-- getting dest. from user -->
+ <!--    <paper-fab id="adding" style="float:left; left:10px; bottom:10px;
+   " onclick="" icon="add" title="add"></paper-fab> -->
+
+</div>
+<style is="custom-style">
+  paper-button.custom {
+    --paper-button-ink-color: var(--paper-pink-a200);
+    /* These could also be individually defined for each of the
+      specific css classes, but we'll just do it once as an example */
+    --paper-button-flat-keyboard-focus: {
+      background-color: var(--paper-pink-a200);
+      color: white !important;
+    };
+    --paper-button-raised-keyboard-focus: {
+      background-color: var(--paper-pink-a200) !important;
+      color: white !important;
+    };
+  }
+  paper-button.custom:hover {
+    background-color: var(--paper-indigo-100);
+  }
+  paper-button.pink {
+    color: var(--paper-pink-a200);
+
+  }
+  paper-button.indigo {
+    background-color: var(--paper-pink-500);
+    color: white;
+    --paper-button-raised-keyboard-focus: {
+      background-color: var(--paper-pink-a200) !important;
+      color: white !important;
+    };
+  }
+ 
+</style>
+    <!--  <paper-button raised class="custom indigo" onclick="wave.selectNext();" type="submit" id="submit"><iron-icon icon="forward"></iron-icon>Next</paper-button>  -->
+     <!-- input to next tab -->
+    <!-- 
+<paper-dialog id="dialog">
+   <h2>plan!!!</h2>
+   
+   <div id="direction-panel"></div>
+   <p id="bill"></p>
+   <p id="note"></p>
+   <div class="buttons">
+        <paper-button >More Info...</paper-button>
+        <paper-button dialog-dismiss>Decline</paper-button>
+        <paper-button dialog-confirm autofocus>Accept</paper-button>
+      </div> 
+      
+     <div class="pm-button"><a href="https://www.payumoney.com/paybypayumoney/#/119303"><img src="https://www.payumoney.com//media/images/payby_payumoney/buttons/131.png" /></a></div>
+
+   </paper-dialog> -->
+   <!-- </section> -->
+   <!-- </paper-material> -->
+   
+
+      <paper-fab id="submit" style="float:right; right:10px; bottom:10px;
+   " onclick="wave.selectNext()" icon="image:navigate-next" title="next"></paper-fab>
+   </div>
+
+   <div>
+   <style>
+  #map {
+    overflow: hidden;
+    padding-bottom: 80.25%;
+    position: relative;
+    height: 50%;
+
+  }
+    
+</style>
+   
+<!-- <google-map id="map" latitude="11.0183" longitude="76.9725"></google-map> -->
+
+    <div id="map"></div>
+        <br>
+       <!-- <paper-button raised  style="text-align: center; margin-left: auto; margin-right: auto;" class="custom indigo" onclick="wave.selectNext()"><iron-icon icon="forward"></iron-icon>Next</paper-button> -->
+   
+     <paper-fab  style="float:left; left:10px; bottom:10px;
+   " onclick="wave.selectPrevious()" icon="image:navigate-before" title="back"></paper-fab>
+
+   <paper-fab  style="float:right; right:10px; bottom:10px;
+   " onclick="wave.selectNext()" icon="image:navigate-next" title="next"></paper-fab>
+   </div>
+   <div>
+  <!-- 
+     <paper-material elevation="1"> -->
+       
+<style is="custom-style">
+  .cafe-header { @apply(--paper-font-headline); }
+  .cafe-light { color: var(--paper-grey-600); }
+  .cafe-location {
+    float: right;
+    font-size: 15px;
+    vertical-align: middle;
+  }
+  .cafe-reserve { color: var(--google-blue-500); }
+  iron-icon.star {
+    --iron-icon-width: 16px;
+    --iron-icon-height: 16px;
+    color: var(--paper-amber-500);
+  }
+  iron-icon.star:last-of-type { color: var(--paper-grey-500); }
+</style>
+  <paper-card image="assets/images/md/flag.jpg">
+    <div class="card-content">
+      <div class="cafe-header">Agenda
+        <div class="cafe-location cafe-light">
+          <iron-icon icon="dashboard"></iron-icon>
+          <!-- <span>250ft</span> -->
+        </div>
+      </div>
+      <!-- <div class="cafe-rating">
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+      </div> -->
+     <!--  <p>$・Italian, Cafe</p>
+      <p class="cafe-light">Small plates, salads &amp; sandwiches in an intimate setting with 12 indoor seats plus patio seating.</p> -->
+      <br>
+      <paper-material elevation="1">
+        
+  
+         <div id="direction-panel"><b>Please make a plan to proceed !</b></div>
+         <p id="bill"></p>
+         <br>
+             </paper-material>
+             <br>
+               
+<style type="text/css">
+table {
+border:1px solid #CCC;
+border-collapse:collapse;
+}
+td {
+border:none;
+}
+</style>
+<!-- Tariff Calculation : -->
+         <table id="tariffdetails" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC">
+  <tbody>
+  <tr>
+    <td colspan="2" bgcolor="#F2F2F2"><strong>Tariff Calculation </strong></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">Car</td>
+    <td bgcolor="#FFFFFF"></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">Rate/KM</td>
+    <td bgcolor="#FFFFFF"></td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFFF">Total KMs </td>
+    <td width="60%" bgcolor="#FFFFFF"></td>
+  </tr>
+      <tr>
+        <td bgcolor="#FFFFFF">Amount</td>
+        <td bgcolor="#FFFFFF"></td>
+      </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">Driver Allowance</td>
+    <td bgcolor="#FFFFFF">Rs.250</td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">Total Amount</td>
+    <td bgcolor="#FFFFFF"></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">GST(Service Tax)</td>
+    <td bgcolor="#FFFFFF">Rs.300</td>
+  </tr>
+   <tr>
+    <td bgcolor="#FFFFFF">Total Tariff </td>
+    <td bgcolor="#FFFFFF"><h2 style="color:#E91E63"></h2></td>
+  </tr>  
+</tbody></table>
+    </div>
+   &nbsp; &nbsp;<p  id="note"></p>
+
+<!-- <paper-button raised onclick="dialog.open()">Open</paper-button> -->
+     <br> &nbsp;&nbsp;&nbsp;<paper-checkbox id="terms" onchange="dialog.open()">I agree to terms and Conditions.</paper-checkbox> 
+
+<br>
+<br>
+<paper-dialog id="dialog">
+  <!-- <h2>Scrollable</h2> -->
+ 
+     <div class="header">
+      <!-- <paper-card heading="" ></paper-card> -->
+     <b> Terms and Conditions : </b>
+  </div>
+   <paper-dialog-scrollable>
+ <p>
+1. The above cost including Car Rent, Fuel, Driver Batta,<br>
+ <br>
+2. The above Kms are calculated approximately. The Final amount will be calculated on actual travelled distance (KM) and days.<br>
+ <br>
+3. Total KM Calculation is From Office to Office.<br>
+ <br>
+4. Parking, Toll Charges and Interstate permit charges Extra.<br>
+ <br>
+5. The timings mentioned here can be modified as per your convenient schedule.<br>
+ <br>
+6. One day is equal to one calender day (From Midnight 12.00 to Midnight 12.00.)<br>
+ <br>
+7. Driver Allowance will be extra if the driver drives between 10.00pm to 6.00am.<br>
+ <br>
+8. No Night Halt charges and No Hill station charges.<br>
+</p>
+  </paper-dialog-scrollable>
+  <div class="footer">
+
+<!-- <paper-button raised style="float:left;" class="custom indigo" onclick="wave.selectNext()"> -->
+<!-- <iron-icon icon="backspace"></iron-icon> -->
+<!-- Back</paper-button> -->
+
+     <!-- <paper-button raised style="float:right;" class="custom indigo" onclick="javascript:location.href='https://www.payumoney.com/paybypayumoney/#/119303'">
+     <iron-icon icon="store"></iron-icon>
+     Checkout</paper-button> -->
+     <paper-fab style="float:left;bottom:10px;" onclick="wave.selectNext();terms.checked=false;" icon="image:navigate-before" title="back"></paper-fab>
+     <paper-fab style="float:right;bottom:10px;" onclick="javascript:location.href='https://www.payumoney.com/paybypayumoney/#/119303'" icon="maps:local-atm" title="checkout"></paper-fab>
+  </div>
+ 
+    <!--  <div class="pm-button"><a href="https://www.payumoney.com/paybypayumoney/#/119303"><img src="https://www.payumoney.com//media/images/payby_payumoney/buttons/131.png" /></a></div> -->
+  
+</paper-dialog>
+    
+  </paper-card>
+     <!-- </paper-material> -->
+  <!--  <div class="buttons">
+        <paper-button >More Info...</paper-button>
+        <paper-button dialog-dismiss>Decline</paper-button>
+        <paper-button dialog-confirm autofocus>Accept</paper-button>
+      </div> -->
+      <!-- PayU checkout
+           
+  
+/*<style is="custom-style">
+  section {
+    width: 100%;
+    height: 50px;
+    @apply(--layout-vertical);
+  }
+  section paper-dialog-scrollable {
+    @apply(--layout-flex);
+  }
+  .header {
+    padding: 8px 24px;
+  }
+  .footer {
+    padding: 8px 24px;
+    text-align: right;
+  }
+</style>-->
+
+ <paper-material elevation="1">
+       
+     <br> &nbsp;&nbsp;&nbsp;<paper-checkbox id="needhotel" onclick="ishotel();">Need Hotel?</paper-checkbox> 
+
+<!-- HOTELS SECTION -->
+     <div class="card-actions" id="hotellist" style="display:none">
+<style is="custom-style">
+  .cafe-header { @apply(--paper-font-headline); }
+  .cafe-light { color: var(--paper-grey-600); }
+  .cafe-location {
+    float: right;
+    font-size: 15px;
+    vertical-align: middle;
+  }
+  .cafe-reserve { color: var(--google-blue-500); }
+  iron-icon.star {
+    --iron-icon-width: 16px;
+    --iron-icon-height: 16px;
+    color: var(--paper-amber-500);
+  }
+  iron-icon.star:last-of-type { color: var(--paper-grey-500); }
+</style>
+
+  <paper-card image="assets/images/md/beach.jpg">
+    <div class="card-content">
+      <div class="cafe-header">Anjappar
+        <div class="cafe-location cafe-light">
+          <iron-icon icon="communication:location-on"></iron-icon>
+          <span>250ft</span>
+        </div>
+      </div>
+      <div class="cafe-rating">
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+        <iron-icon class="star" icon="star"></iron-icon>
+      </div>
+      <p>Coimbatore</p>
+      <p class="cafe-light">Small plates, salads &amp; sandwiches in an intimate setting with 12 indoor seats plus patio seating.</p>
+    </div>
+    <div class="card-actions">
+      <p>Availability</p>
+      <div class="horizontal justified">
+        <!-- <paper-icon-button icon="icons:event"></paper-icon-button> -->
+          <vaadin-date-picker id="hotdate" label="Arrival" style="width:125px"></vaadin-date-picker>
+          persons:
+        <<!-- paper-button>2</paper-button>
+        <paper-button>3</paper-button>
+        <paper-button>4</paper-button> -->
+    
+
+      </div>
+
+      <paper-button>Reserve</paper-button>
+    </div>
+  </paper-card>
+
+    </div>
+
+     <script type="text/javascript">
+
+
+function ishotel() {
+ if (document.getElementById('needhotel').checked) {
+        document.getElementById('hotellist').style.display = 'block';
+    }
+    else {
+              document.getElementById('hotellist').style.display = 'none';
+
+    }
+    // if (document.getElementById('needhotel').unchecked) {
+    //     document.getElementById('hotellist').style.display = 'none';
+    // }
+    
+
+}
+</script>
+     <br>
+ </paper-material>
+   
+     <paper-fab  style="float:left; left:10px; bottom:10px;
+   " onclick="wave.selectNext()" icon="image:navigate-before" title="back"></paper-fab>
+   </div>
+
+   </iron-pages>
+
+
+   </section>
+    <!--   <paper-dialog>
+  <h2>Header</h2>
+  <paper-dialog-scrollable>
+    Lorem ipsum...
+  </paper-dialog-scrollable>
+  <div class="buttons">
+    <paper-button dialog-dismiss>Cancel</paper-button>
+    <paper-button dialog-confirm>Accept</paper-button>
+  </div>
+</paper-dialog> 
+<script>
+    function clickHandler(e) {
+      var button = e.target;
+      while (!button.hasAttribute('data-dialog') && button !== document.body) {
+        button = button.parentElement;
+      }
+      if (!button.hasAttribute('data-dialog')) {
+        return;
+      }
+      var id = button.getAttribute('data-dialog');
+      var dialog = document.getElementById(id);
+      if (dialog) {
+        dialog.open();
+      }
+    }
+  </script>-->
+<script>
+var car_charge=0;
+var driver_allowance=250;
+var gst=307;
+// var finalamt=0;
+function getit() {
+  var carbook = document.getElementById("carpref");
+  var car_name = carbook.options[carbook.selectedIndex].text;
+  car_charge = carbook.options[carbook.selectedIndex].value;
+  console.log(car_charge,car_name);
+  // car name
+     document.getElementById('tariffdetails').rows[1].cells[1].innerHTML=car_name;
+  // oneway running KM
+     document.getElementById('tariffdetails').rows[2].cells[1].innerHTML='Rs. '+car_charge;
+
+  // document.getElementById("details1").innerHTML = '<strong>Voila</strong> !!! ' + car_name + ' is Available in the selected date ';
+  // document.getElementById("details2").innerHTML = '<b> Please pay Rs.' + car_charge + ' at checkout </b>'; // document.getElementById("details1").innerHTML = '<strong>Voila</strong> !!! ' + car_name + ' is Available in the selected date ';
+  // document.getElementById("details2").innerHTML = '<b> Please pay Rs.' + car_charge + ' at checkout </b>';
+
+}
+   
+// function showcard(){document.getElementById("waypoint2").className="reveal";}
+function planmytrip() {
+  var directionsService = new google.maps.DirectionsService;
+  // FOR AUTOCOMPLETE SUGGESTION !!!!
+  google.maps.event.addDomListener(window, 'load', function () {
+      new google.maps.places.SearchBox(document.getElementById('start'));
+      new google.maps.places.SearchBox(document.getElementById('waypoint1'));
+      new google.maps.places.SearchBox(document.getElementById('waypoint2'));
+      new google.maps.places.SearchBox(document.getElementById('waypoint3'));
+      new google.maps.places.SearchBox(document.getElementById('end'));
+
+
+  });  
+   // google.maps.places.SearchBox.addListener('places_changed', function() {
+   //  var placess = searchBox.getPlaces();
+   //  console.log(placess);
+    // console.log('')
+// });
+  var directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': false });
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: {lat: 11.6139, lng: 77.2090},
+    // mapTypeControl: true,
+    // mapTypeControlOptions: {
+    //     style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+    //     position: google.maps.ControlPosition.TOP_CENTER
+    // },
+    zoomControl: true,
+    zoomControlOptions: {
+        position: google.maps.ControlPosition.LEFT_CENTER
+    },
+    scaleControl: true,
+    // streetViewControl: true,
+    // streetViewControlOptions: {
+    //     position: google.maps.ControlPosition.LEFT_TOP
+    // },
+    fullscreenControl: true                      
+
+  });
+  directionsDisplay.setMap(map);
+
+  document.getElementById('submit').addEventListener('click', function() {
+        google.maps.event.trigger(map, 'resize');
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+  });
+}
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+  
+  var waypts = [];  // consits of the ways the user trespasses
+// var det=document.getElementById('date1').value;
+// console.log(det);
+if(document.getElementById('waypoint1').value!=0)
+    {
+  var checkboxArray = document.getElementById('waypoint1');
+      waypts.push({
+        location: checkboxArray.value,
+        stopover: true
+      });
+       }
+
+      if(document.getElementById('waypoint2').value!=0)
+    {
+      checkboxArray = document.getElementById('waypoint2');
+      waypts.push({
+        location: checkboxArray.value,
+        stopover: true
+      });
+    }
+
+    if(document.getElementById('waypoint3').value!=0)
+    {
+      checkboxArray = document.getElementById('waypoint3');
+      waypts.push({
+        location: checkboxArray.value,
+        stopover: true
+      });
+    }
+ 
+
+        // var checkboxArray = document.getElementById('waypoints');
+        // for (var i = 0; i < checkboxArray.length; i++) {
+        //   if (checkboxArray.options[i].selected) {
+        //     waypts.push({
+        //       location: checkboxArray[i].value,
+        //       stopover: true
+        //     });
+        //   }
+        // }
+        console.log(waypts);
+        var mm=document.getElementById('start').value;
+if(5>4){
+  var nn=document.getElementById('end').value;
+}
+        console.log(mm,nn);
+        directionsService.route({
+          origin: mm,
+          destination: nn,
+          waypoints: waypts,
+          optimizeWaypoints: false,
+          travelMode: google.maps.TravelMode.DRIVING
+        }, function(response, status) {
+          if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            var details = document.getElementById('direction-panel'); // to return details !!!
+            details.innerHTML = '';
+            // For each route, display summary information.
+            var totaldistance =0;
+            var totalamount=0;
+            for (var i = 0; i < route.legs.length; i++) {
+              var routeSegment = i + 1;
+              if(i==0)
+              {
+              details.innerHTML +='<iron-icon icon="maps:near-me" prefix></iron-icon>'+'&nbsp;' +' Starting From : <br>';
+            }
+               else if (i==(route.legs.length-1)) {
+           details.innerHTML +='<iron-icon icon="maps:my-location" prefix></iron-icon>'+'&nbsp;' +' Ending at : <br>';
+         }
+         else {
+           details.innerHTML += '<iron-icon icon="maps:directions" prefix></iron-icon>'+'&nbsp;' +' Next tour : <br>';
+         }
+
+              details.innerHTML += '<b>Route : ' + routeSegment +
+                  '</b><br>';
+              details.innerHTML += route.legs[i].start_address + ' to ';
+              details.innerHTML += route.legs[i].end_address + '<br>';
+              details.innerHTML += route.legs[i].distance.text + '<br><br>';
+             totaldistance = totaldistance+route.legs[i].distance.value;
+            }
+console.log(totaldistance=totaldistance/1000);
+
+document.getElementById('bill').innerHTML='<iron-icon icon="maps:local-taxi" prefix></iron-icon>'+'&nbsp;' +'Total distance is ' +totaldistance+' Kms';
+
+document.getElementById('tariffdetails').rows[3].cells[1].innerHTML=totaldistance+' Kms';
+
+totalamount=totaldistance*car_charge;
+
+document.getElementById('tariffdetails').rows[4].cells[1].innerHTML='Rs. '+Math.round(totalamount);
+document.getElementById('tariffdetails').rows[6].cells[1].innerHTML='Rs. '+Math.round(totalamount+driver_allowance);
+console.log(document.getElementById('tariffdetails').rows[8].cells[1].innerHTML);
+// document.getElementById('tariffdetails').rows[8].cells[1].innerHTML='<h2 style="color:#E91E63">Rs.'totalamount+driver_allowance+gst+'</h2>';
+// finalamt=Math.round(totalamount+driver_allowance+gst);
+document.getElementById('tariffdetails').rows[8].cells[1].innerHTML='<h2 style="color:#E91E63">Rs.'+Math.round(totalamount+driver_allowance+gst)+'</h2>';
+document.getElementById('note').innerHTML='<b>Please pay Rs. ' + Math.round(totalamount+driver_allowance+gst) +' at checkout </b>';
+
+
+
+
+     // console.log(document.getElementById('tariffdetails').rows[1].cells[1].innerHTML,document.getElementById('tariffdetails').rows[2].cells[1].innerHTML,celli);
+     // car name     // document.getElementById('tariffdetails').rows[1].cells[1].innerHTML=;
+     // total kms
+          // document.getElementById('tariffdetails').rows[3].cells[1].innerHTML='200';
+     //  amount
+     // document.getElementById('tariffdetails').rows[4].cells[1].innerHTML='12121';
+     // amount with tax
+     // document.getElementById('tariffdetails').rows[3].cells[1].innerHTML='21232332';
+
+
+           } else {
+            toast1.open();
+            // window.alert('Directions request failed due to ' + status);  // adding exception from server
+          }
+        });
+      }
+      </script>
+<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous">
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=planmytrip&libraries=places">
+</script>    
+      
+   
+   <!-- </main> -->
+ 
+       <!--  <paper-material elevation="1">
+        <div class="content">
+          <div id="disqus_thread"></div>
+          </div>  
+        </paper-material> -->
+        
+         <!--  <iron-pages attr-for-selected="data-route" selected="{{route}}">
+            <section data-route="home">
+              <paper-material elevation="1">
+                <my-greeting></my-greeting>
+
+                <p class="subhead">You now have:</p>
+                <my-list></my-list>
+
+                <p>Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
+              </paper-material>
+
+              <paper-material elevation="1">
+                <p>This is another card.</p>
+              </paper-material>
+
+              <paper-material elevation="1">
+                <h1 id="license">License</h1>
+                <p>Everything in this repo is BSD style license unless otherwise specified.</p>
+                <p>Copyright (c) 2015 The Polymer Authors. All rights reserved.</p>
+                <p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+                <ul>
+                <li>Redistributions of source code must retain the above copyright
+                notice, this list of conditions and the following disclaimer.</li>
+                <li>Redistributions in binary form must reproduce the above
+                copyright notice, this list of conditions and the following disclaimer
+                in the documentation and/or other materials provided with the
+                distribution.</li>
+                <li>Neither the name of Google Inc. nor the names of its
+                contributors may be used to endorse or promote products derived from
+                this software without specific prior written permission.</li>
+                </ul>
+                <p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+                <div> <a title="Customize this theme" href="/custom-style/?base=dark-side"><paper-button raised="" class="info x-scope paper-button-0" role="button" tabindex="0" aria-disabled="false" pressed="">
+
+    <paper-ripple class="style-scope paper-button" animating="">
+    <div id="background" class="style-scope paper-ripple" style="opacity: 0; background-color: rgb(45, 35, 62);"></div>
+    <div id="waves" class="style-scope paper-ripple"><div class="wave-container style-scope paper-ripple" style="top: -97.6797px; left: 0px; width: 242.734px; height: 242.734px; transform: translate3d(-47.4922px, -3.6875px, 0px);"><div class="wave style-scope paper-ripple" style="opacity: 0.25; transform: scale3d(2.28271, 2.28271, 1); background-color: rgb(45, 35, 62);"></div></div></div>
+  </paper-ripple>
+
+    <paper-material animated="" class="content  style-scope paper-button x-scope paper-material-0" elevation="4">
+    
+       &nbsp;<iron-icon icon="polymer" class="x-scope iron-icon-0"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g class="style-scope iron-icon"><path d="M19 4h-4L7.11 16.63 4.5 12 9 4H5L.5 12 5 20h4l7.89-12.63L19.5 12 15 20h4l4.5-8z" class="style-scope iron-icon"></path></g></svg>
+  <iron-meta id="meta" type="iconset" class="style-scope iron-icon"></iron-meta>
+  </iron-icon> &nbsp; Customize this theme
+  </paper-material>
+  </paper-button>
+  </a>
+  </div>
+              </paper-material>
+            </section>
+
+            <section data-route="users">
+              <paper-material elevation="1">
+                <h2 class="page-title">Users</h2>
+                <p>This is the users section</p>
+                <a href$="{{baseUrl}}users/Addy">Addy</a><br>
+                <a href$="{{baseUrl}}users/Rob">Rob</a><br>
+                <a href$="{{baseUrl}}users/Chuck">Chuck</a><br>
+                <a href$="{{baseUrl}}users/Sam">Sam</a>
+              </paper-material>
+            </section>
+
+            <section data-route="user-info">
+              <paper-material elevation="1">
+                <h2 class="page-title">User: {{params.name}}</h2>
+                <div>This is {{params.name}}'s section</div>
+              </paper-material>
+            </section>
+
+            <section data-route="contact">
+              <paper-material elevation="1">
+                <h2 class="page-title">Contact</h2>
+                <p>This is the contact section</p>
+              </paper-material>
+            </section>
+          </iron-pages>
+        </div> -->
+      </paper-scroll-header-panel>
+    </paper-drawer-panel>
+
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+    </paper-toast>
+    <paper-toast id="toast1" duration="0" text="Please make a plan to view it !!!.">
+  <paper-button onclick="toast1.toggle();planpage.select('0')" class="yellow-button">Close now!</paper-button>
+</paper-toast>
+
+    <!-- Uncomment next block to enable Service Worker support (1/2) -->
+    
+    <paper-toast id="caching-complete"
+                 duration="6000"
+                 text="Caching complete! This app will work offline.">
+    </paper-toast>
+
+    <platinum-sw-register auto-register
+                          clients-claim
+                          skip-waiting
+                          base-uri="bower_components/platinum-sw/bootstrap"
+                          on-service-worker-installed="displayInstalledToast">
+      <platinum-sw-cache default-cache-strategy="fastest"
+                         cache-config-file="cache-config.json">
+      </platinum-sw-cache>
+    </platinum-sw-register>
+    
+
+  </template>
+
+  <!-- build:js scripts/app.js -->
+  <script src="scripts/app.js"></script>
+ 
+  <!-- endbuild-->
+</body>
+
+</html>

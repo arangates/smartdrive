@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/main.css">
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="elements/elements.html">
+  <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous">
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=&libraries=places">
+</script> 
+</head>
+<body>
+<template is="dom-bind" id="app">
+     <paper-input type="text"  value="{{end2::input}}" label="Add location" id="start"></paper-input>
+
+     <paper-input type="text"  value="{{end2}}" label="Start:"></paper-input>
+
+	<script type="text/javascript">
+	// FOR AUTOCOMPLETE SUGGESTION 
+	function planmytrip() {
+		  var directionsService = new google.maps.DirectionsService;
+
+		  google.maps.event.addDomListener(window, 'load', function () {
+	      new google.maps.places.SearchBox(document.getElementById('start'));
+	        }); 
+		};
+	</script>
+   
+</template>
+</body>
+ <script src="scripts/app.js"></script>
+</html>
+
+

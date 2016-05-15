@@ -1,0 +1,37 @@
+{
+  "name": "vaadin-license-checker",
+  "version": "0.9.2",
+  "authors": [
+    "Vaadin Ltd"
+  ],
+  "license": "Apache-2.0",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iron-ajax": "PolymerElements/iron-ajax#^1.0.0",
+    "iron-localstorage": "PolymerElements/iron-localstorage#^1.0.0",
+    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#^1.0.0",
+    "polymer": "Polymer/polymer#^1.0.0",
+    "font-awesome": "^4.5.0"
+  },
+  "devDependencies": {
+    "iron-input": "PolymerElements/iron-input#^1.0.0",
+    "web-component-tester": "^3.3.10"
+  },
+  "homepage": "https://github.com/vaadin/license-checker",
+  "_release": "0.9.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.9.2",
+    "commit": "d6f359017912f5de1c28aa986eb6b9abca5c4e90"
+  },
+  "_source": "git://github.com/vaadin/license-checker.git",
+  "_target": "0.9.2",
+  "_originalSource": "vaadin/license-checker"
+}

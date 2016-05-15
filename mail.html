@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title></title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<button id="letgo">send</button>
+<script type="text/javascript">
+$('#letgo').click(function() {
+{
+
+	console.log('poda');
+	$.ajax({
+  type: “POST”,
+  url: “https://mandrillapp.com/api/1.0/messages/send.json”,
+  data: {
+    ‘key’: ‘u2iU6ip-9GM6T-4ZEdSxwQ’,
+    ‘message’: {
+      ‘from_email’: ‘YOUR@EMAIL.HERE’,
+      ‘to’: [
+          {
+            ‘email’: ‘arangates@gmail.com’,
+            ‘name’: ‘RECIPIENT NAME (OPTIONAL)’,
+            ‘type’: ‘to’
+          },
+          {
+            ‘email’: ‘arangates@hotmail.com’,
+            ‘name’: ‘ANOTHER RECIPIENT NAME (OPTIONAL)’,
+            ‘type’: ‘to’
+          }
+        ],
+      ‘autotext’: ‘true’,
+      ‘subject’: ‘YOUR SUBJECT HERE!’,
+      ‘html’: ‘YOUR EMAIL CONTENT HERE! YOU CAN USEkxmkxmx HTML!’
+    }
+  }
+ }).done(function(response) {
+   console.log(response); // if you're into that sorta thing
+ });
+}
+</script>
+</body>
+</html>

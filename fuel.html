@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Polymer Starter Kit">
+  <title>Smardrive</title>
+
+  <!-- Place favicon.ico in the `app/` directory -->
+
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#2E3AA1">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Tile color for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="PSK">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- endbuild -->
+
+  <!-- Because this project uses vulcanize this should be your only html import
+       in this file. All other imports should go in elements.html -->
+  <link rel="import" href="elements/elements.html">
+  <!-- <link rel="import" href="dark-side/dark-side.html"> -->
+
+  <!-- For shared styles, shared-styles.html import in elements.html -->
+  <style is="custom-style" include="shared-styles"></style>
+ <style>
+  #map {
+    overflow: hidden;
+    padding-bottom: 80.25%;
+    position: relative;
+    height: 50%;
+
+  }
+    
+</style>
+</head>
+
+<body unresolved>
+  <span id="browser-sync-binding"></span>
+  <template is="dom-bind" id="app">
+
+    <paper-drawer-panel id="paperDrawerPanel" responsive-width="1400px">
+      <!-- Drawer Scroll Header Panel -->
+      <paper-scroll-header-panel drawer fixed>
+
+        <!-- Drawer Toolbar -->
+       <!--  <paper-toolbar id="drawerToolbar">
+          <span class="menu-name">Menu</span>
+
+        </paper-toolbar> -->
+
+        <!-- Drawer Content -->
+        <paper-menu >
+          <!-- <a data-route="home" href="{{baseUrl}}"> -->
+          <a class="mdl-layout-title" href="homepage.html">
+          <img src="assets/images/logo-dark.png" width="204px" height="130px" alt=FAB!>
+        </a>
+          <a href="dashboard.html">
+            <iron-icon icon="dashboard"></iron-icon>
+            <span>Dashboard</span>
+          </a>
+            <a href="tracktrip.html">
+            <iron-icon icon="icons:settings-input-antenna"></iron-icon>
+           <span>Track Trip</span>
+          </a>
+          <!-- <a data-route="users" href="{{baseUrl}}users"> -->
+          <a href="findmycar.html">
+            <iron-icon icon="icons:room"></iron-icon>
+            <span>Find mycar</span>
+          </a>
+        
+         
+
+  <paper-submenu>
+    <paper-item class="menu-trigger"><iron-icon icon="maps:near-me" prefix></iron-icon>Find Nearby</paper-item>
+    <paper-menu class="menu-content">
+
+<a href="fuel.html">
+<iron-icon icon="maps:local-gas-station"></iron-icon>
+<span>Fuel Stations</span>
+</a>
+
+<a href="restaurants.html">
+<iron-icon icon="maps:restaurant-menu"></iron-icon>
+<span>Restaurants</span>
+</a>
+
+<!-- <a href="repair.html">
+<iron-icon icon="maps:local-car-wash"></iron-icon>
+<span>Auto Repair</span>
+</a> -->
+    </paper-menu>
+  </paper-submenu>
+  
+
+<a href="emergency.html">
+<iron-icon icon="maps:local-hospital"></iron-icon>
+<span>Emergency Help</span>
+</a>
+<a href="diagnosis.html">
+<iron-icon icon="settings"></iron-icon>
+<span>Auto Diagnosis</span>
+</a>
+
+<a href="insurance.html">
+<iron-icon icon="maps:local-atm"></iron-icon>
+<span>Insurance</span>
+</a>          
+
+<a href="rating.html">
+<iron-icon icon="icons:perm-identity"></iron-icon>
+<span>Ratings</span>
+</a>  
+    
+
+        </paper-menu>
+      </paper-scroll-header-panel>
+
+      <!-- Main Area -->
+      <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+        <!-- Main Toolbar -->
+        <paper-toolbar id="mainToolbar" class="tall">
+          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+
+          <span class="space"></span>
+
+          <!-- Toolbar icons -->
+   <!--        <paper-icon-button icon="refresh"></paper-icon-button>
+          <paper-icon-button icon="search"></paper-icon-button> -->
+
+          <!-- Application name -->
+          <div class="middle middle-container">
+            <div class="app-name">SmartDrive</div>
+          </div>
+
+          <!-- Application sub title -->
+          <div class="bottom bottom-container">
+            <div class="bottom-title">Make your Dumb Car Smart</div>
+          </div>
+        </paper-toolbar>
+        <!-- Main Content -->
+  <section>      
+<paper-toolbar>
+<paper-tabs selected="{{selected}}" autoselect id="wave" noink  style="width: 650px;" >
+  <paper-tab><iron-icon icon="flag"></iron-icon>Locate</paper-tab>
+  <paper-tab><iron-icon icon="room"></iron-icon>map view</paper-tab>
+  <paper-tab><iron-icon icon="maps:local-gas-station"></iron-icon>Gas stations</paper-tab>
+  <!-- <paper-tab><iron-icon icon="description"></iron-icon>Summary</paper-tab> -->
+</paper-tabs>
+</paper-toolbar>
+
+<iron-pages selected="{{selected}}" id="planpage">
+<!-- make plan -->
+
+
+<div>
+
+  <div id="findhotels" style="display:none">
+      Find hotels in:
+    </div>
+
+    <div id="locationField">
+      <paper-input id="autocomplete" placeholder="Enter a city" type="text" ></paper-input>
+    </div>
+    <paper-fab id="submit" style="float:right; right:10px; bottom:10px;" onclick="wave.selectNext()" icon="image:navigate-next" title="next"></paper-fab>
+
+</div>
+
+<div>
+    <div id="map"></div>
+     <br>
+       <!-- <paper-button raised  style="text-align: center; margin-left: auto; margin-right: auto;" class="custom indigo" onclick="wave.selectNext()"><iron-icon icon="forward"></iron-icon>Next</paper-button> -->
+   
+     <paper-fab  style="float:left; left:10px; bottom:10px;
+   " onclick="wave.selectPrevious()" icon="image:navigate-before" title="back"></paper-fab>
+
+   <paper-fab  style="float:right; right:10px; bottom:10px;
+   " onclick="wave.selectNext()" icon="image:navigate-next" title="next"></paper-fab>
+   
+</div>
+
+<div>
+    <div id="listing">
+      <table id="resultsTable">
+        <tbody id="results"></tbody>
+      </table>
+    </div>
+
+    <div >
+      <div id="info-content" style="display:none;">
+        <table>
+          <tr id="iw-url-row" class="iw_table_row">
+            <td id="iw-icon" class="iw_table_icon"></td>
+            <td id="iw-url"></td>
+          </tr>
+          <tr id="iw-address-row" class="iw_table_row">
+            <td class="iw_attribute_name">Address:</td>
+            <td id="iw-address"></td>
+          </tr>
+          <tr id="iw-phone-row" class="iw_table_row">
+            <td class="iw_attribute_name">Telephone:</td>
+            <td id="iw-phone"></td>
+          </tr>
+          <tr id="iw-rating-row" class="iw_table_row">
+            <td class="iw_attribute_name">Rating:</td>
+            <td id="iw-rating"></td>
+          </tr>
+          <tr id="iw-website-row" class="iw_table_row">
+            <td class="iw_attribute_name">Website:</td>
+            <td id="iw-website"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    </div>
+</iron-pages>
+</section>
+    <script>
+      var map, places, infoWindow;
+      var markers = [];
+      var autocomplete;
+      // var countryRestrict = {'country': 'us'};
+      var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green';
+      var hostnameRegexp = new RegExp('^https?://.+?/');
+
+      var countries = {
+        'au': {
+          center: {lat: -25.3, lng: 133.8},
+          zoom: 4
+        },
+        'br': {
+          center: {lat: -14.2, lng: -51.9},
+          zoom: 3
+        },
+        'ca': {
+          center: {lat: 62, lng: -110.0},
+          zoom: 3
+        },
+        'fr': {
+          center: {lat: 46.2, lng: 2.2},
+          zoom: 5
+        },
+        'de': {
+          center: {lat: 51.2, lng: 10.4},
+          zoom: 5
+        },
+        'mx': {
+          center: {lat: 23.6, lng: -102.5},
+          zoom: 4
+        },
+        'nz': {
+          center: {lat: -40.9, lng: 174.9},
+          zoom: 5
+        },
+        'it': {
+          center: {lat: 41.9, lng: 12.6},
+          zoom: 5
+        },
+        'za': {
+          center: {lat: -30.6, lng: 22.9},
+          zoom: 5
+        },
+        'es': {
+          center: {lat: 40.5, lng: -3.7},
+          zoom: 5
+        },
+        'pt': {
+          center: {lat: 39.4, lng: -8.2},
+          zoom: 6
+        },
+        'us': {
+          center: {lat: 37.1, lng: -95.7},
+          zoom: 3
+        },
+        'uk': {
+          center: {lat: 54.8, lng: -4.6},
+          zoom: 5
+        }
+      };
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {lat: 11.6139, lng: 77.2090},
+          // mapTypeControl: true,
+          panControl: false,
+          zoomControl: false
+          // streetViewControl: false
+        });
+
+        infoWindow = new google.maps.InfoWindow({
+          content: document.getElementById('info-content')
+        });
+
+        // Create the autocomplete object and associate it with the UI input control.
+        // Restrict the search to the default country, and to place type "cities".
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */ (
+                document.getElementById('autocomplete')), {
+              types: ['(cities)'],
+              // componentRestrictions: countryRestrict
+            });
+        places = new google.maps.places.PlacesService(map);
+
+        autocomplete.addListener('place_changed', onPlaceChanged);
+
+        // Add a DOM event listener to react when the user selects a country.
+        document.getElementById('country').addEventListener(
+            'change', setAutocompleteCountry);
+        
+          document.getElementById('submit').addEventListener('click', function() {
+        google.maps.event.trigger(map, 'resize');
+  });
+      }
+
+      // When the user selects a city, get the place details for the city and
+      // zoom the map in on the city.
+      function onPlaceChanged() {
+        var place = autocomplete.getPlace();
+        console.log(autocomplete.getPlace());
+        if (place.geometry) {
+          map.panTo(place.geometry.location);
+          map.setZoom(15);
+          search();
+        } else {
+          document.getElementById('autocomplete').placeholder = 'Enter a city';
+        }
+      }
+
+      // Search for hotels in the selected city, within the viewport of the map.
+      function search() {
+        var search = {
+          bounds: map.getBounds(),
+          types: ['hotel']
+        };
+
+        places.nearbySearch(search, function(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            clearResults();
+            clearMarkers();
+            // Create a marker for each hotel found, and
+            // assign a letter of the alphabetic to each marker icon.
+            for (var i = 0; i < results.length; i++) {
+              var markerLetter = String.fromCharCode('A'.charCodeAt(0) + i);
+              var markerIcon = MARKER_PATH + markerLetter + '.png';
+              // Use marker animation to drop the icons incrementally on the map.
+              markers[i] = new google.maps.Marker({
+                position: results[i].geometry.location,
+                animation: google.maps.Animation.DROP,
+                icon: markerIcon
+              });
+              // If the user clicks a hotel marker, show the details of that hotel
+              // in an info window.
+              markers[i].placeResult = results[i];
+              google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+              setTimeout(dropMarker(i), i * 100);
+              addResult(results[i], i);
+            }
+          }
+        });
+      }
+
+      function clearMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+          if (markers[i]) {
+            markers[i].setMap(null);
+          }
+        }
+        markers = [];
+      }
+
+      // Set the country restriction based on user input.
+      // Also center and zoom the map on the given country.
+      function setAutocompleteCountry() {
+        var country = document.getElementById('country').value;
+        if (country == 'all') {
+          autocomplete.setComponentRestrictions([]);
+          map.setCenter({lat: 15, lng: 0});
+          map.setZoom(2);
+        } else {
+          autocomplete.setComponentRestrictions({'country': country});
+          map.setCenter(countries[country].center);
+          map.setZoom(countries[country].zoom);
+        }
+        clearResults();
+        clearMarkers();
+      }
+
+      function dropMarker(i) {
+        return function() {
+          markers[i].setMap(map);
+        };
+      }
+
+      function addResult(result, i) {
+        var results = document.getElementById('results');
+        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + i);
+        var markerIcon = MARKER_PATH + markerLetter + '.png';
+
+        var tr = document.createElement('tr');
+        tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');
+        tr.onclick = function() {
+          google.maps.event.trigger(markers[i], 'click');
+        };
+
+        var iconTd = document.createElement('td');
+        var nameTd = document.createElement('td');
+        var icon = document.createElement('img');
+        icon.src = markerIcon;
+        icon.setAttribute('class', 'placeIcon');
+        icon.setAttribute('className', 'placeIcon');
+        var name = document.createTextNode(result.name);
+        iconTd.appendChild(icon);
+        nameTd.appendChild(name);
+        tr.appendChild(iconTd);
+        tr.appendChild(nameTd);
+        results.appendChild(tr);
+      }
+
+      function clearResults() {
+        var results = document.getElementById('results');
+        while (results.childNodes[0]) {
+          results.removeChild(results.childNodes[0]);
+        }
+      }
+
+      // Get the place details for a hotel. Show the information in an info window,
+      // anchored on the marker for the hotel that the user selected.
+      function showInfoWindow() {
+        var marker = this;
+        places.getDetails({placeId: marker.placeResult.place_id},
+            function(place, status) {
+              if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                return;
+              }
+              infoWindow.open(map, marker);
+              buildIWContent(place);
+            });
+      }
+
+      // Load the place information into the HTML elements used by the info window.
+      function buildIWContent(place) {
+        document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
+            'src="' + place.icon + '"/>';
+        document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
+            '">' + place.name + '</a></b>';
+        document.getElementById('iw-address').textContent = place.vicinity;
+
+        if (place.formatted_phone_number) {
+          document.getElementById('iw-phone-row').style.display = '';
+          document.getElementById('iw-phone').textContent =
+              place.formatted_phone_number;
+        } else {
+          document.getElementById('iw-phone-row').style.display = 'none';
+        }
+
+        // Assign a five-star rating to the hotel, using a black star ('&#10029;')
+        // to indicate the rating the hotel has earned, and a white star ('&#10025;')
+        // for the rating points not achieved.
+        if (place.rating) {
+          var ratingHtml = '';
+          for (var i = 0; i < 5; i++) {
+            if (place.rating < (i + 0.5)) {
+              ratingHtml += '&#10025;';
+            } else {
+              ratingHtml += '&#10029;';
+            }
+          document.getElementById('iw-rating-row').style.display = '';
+          document.getElementById('iw-rating').innerHTML = ratingHtml;
+          }
+        } else {
+          document.getElementById('iw-rating-row').style.display = 'none';
+        }
+
+        // The regexp isolates the first part of the URL (domain plus subdomain)
+        // to give a short URL for displaying in the info window.
+        if (place.website) {
+          var fullUrl = place.website;
+          var website = hostnameRegexp.exec(place.website);
+          if (website === null) {
+            website = 'http://' + place.website + '/';
+            fullUrl = website;
+          }
+          document.getElementById('iw-website-row').style.display = '';
+          document.getElementById('iw-website').textContent = website;
+        } else {
+          document.getElementById('iw-website-row').style.display = 'none';
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap"
+        async defer></script>  
+
+      </paper-scroll-header-panel>
+    </paper-drawer-panel>
+
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+    </paper-toast>
+
+    <!-- Uncomment next block to enable Service Worker support (1/2) -->
+    <!--
+    <paper-toast id="caching-complete"
+                 duration="6000"
+                 text="Caching complete! This app will work offline.">
+    </paper-toast>
+
+    <platinum-sw-register auto-register
+                          clients-claim
+                          skip-waiting
+                          base-uri="bower_components/platinum-sw/bootstrap"
+                          on-service-worker-installed="displayInstalledToast">
+      <platinum-sw-cache default-cache-strategy="fastest"
+                         cache-config-file="cache-config.json">
+      </platinum-sw-cache>
+    </platinum-sw-register>
+    -->
+
+  </template>
+
+  <!-- build:js scripts/app.js -->
+  <script src="scripts/app.js"></script>
+  <!-- endbuild-->
+</body>
+
+</html>
+

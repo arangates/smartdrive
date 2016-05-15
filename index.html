@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Polymer Starter Kit">
+  <title>Smardrive</title>
+
+  <!-- Place favicon.ico in the `app/` directory -->
+
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#2E3AA1">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Tile color for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="PSK">
+  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild-->
+
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <!-- endbuild -->
+
+  <!-- Because this project uses vulcanize this should be your only html import
+       in this file. All other imports should go in elements.html -->
+  <link rel="import" href="elements/elements.html">
+  <!-- <link rel="import" href="dark-side/dark-side.html"> -->
+
+  <!-- For shared styles, shared-styles.html import in elements.html -->
+  <style is="custom-style" include="shared-styles"></style>
+     <script type="text/javascript" src="d3.min.js"></script>
+    <script type="text/javascript" src="radialProgress.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="styles/gauge.css">
+
+    <style>
+
+        body {
+            background-color: #FFFFFF;
+        }
+
+        #test .arc2 {
+            stroke-weight:0.1;
+            fill: #3660b0;
+        }
+
+        #outer {
+            background:#FFFFFF;
+            border-radius: 5px;
+            color: #000;
+        }
+
+        #div1, #div2, #div3, #div4 ,#div5 ,#div6 {
+            width: 33%;
+            height: 200px;
+            box-sizing: border-box;
+            float: left;
+        }
+
+        #div2 .arc {
+            stroke-weight: 0.1;
+            fill: #f0a417;
+        }
+
+        #div2 .arc2 {
+            stroke-weight: 0.1;
+            fill: #b00d08;
+        }
+
+        #div3 .arc {
+            stroke-weight: 0.1;
+            fill: #1d871b;
+        }
+
+
+        .selectedRadial {
+            border-radius: 3px;
+            background: #f4f4f4;
+            color: #000;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+            -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+            border: 1px solid rgba(200,200,200,0.85);
+        }
+
+        .radial {
+            border-radius: 3px;
+            background: #FFFFFF;
+            color: #000;
+
+        }
+
+
+    </style>
+    <script type="text/javascript" src="http://pubnub.github.io/eon/v/eon/0.0.10/eon.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/v/eon/0.0.10/eon.css" />
+
+</head>
+
+<body unresolved>
+  <span id="browser-sync-binding"></span>
+  <template is="dom-bind" id="app">
+
+    <paper-drawer-panel id="paperDrawerPanel" responsive-width="1400px">
+      <!-- Drawer Scroll Header Panel -->
+      <paper-scroll-header-panel drawer fixed>
+
+        <!-- Drawer Toolbar -->
+       <!--  <paper-toolbar id="drawerToolbar">
+          <span class="menu-name">Menu</span>
+
+        </paper-toolbar> -->
+
+<!-- Drawer Content -->
+<paper-menu >
+      <!-- <a data-route="home" href="{{baseUrl}}"> -->
+      <a class="mdl-layout-title" href="homepage.html">
+          <img src="assets/images/logo-dark.png" width="204px" height="130px" alt=FAB!>
+      </a>
+      <a href="/">
+      <iron-icon icon="dashboard"></iron-icon>
+      <span>Dashboard</span>
+      </a>
+      <a href="tracktrip.html">
+      <iron-icon icon="icons:settings-input-antenna"></iron-icon>
+      <span>Track Trip</span>
+      </a>
+      <!-- <a data-route="users" href="{{baseUrl}}users"> -->
+      <a href="findmycar.html">
+      <iron-icon icon="icons:room"></iron-icon>
+      <span>Plan trip</span>
+      </a>
+
+<paper-submenu>
+<paper-item class="menu-trigger"><iron-icon icon="maps:near-me" prefix></iron-icon>Find Nearby</paper-item>
+<paper-menu class="menu-content">
+    <a href="fuel.html">
+    <iron-icon icon="maps:local-gas-station"></iron-icon>
+    <span>Fuel Stations</span>
+    </a>
+
+    <a href="restaurants.html">
+    <iron-icon icon="maps:restaurant-menu"></iron-icon>
+    <span>Restaurants</span>
+    </a>
+
+    <a href="repair.html">
+    <iron-icon icon="maps:local-car-wash"></iron-icon>
+    <span>Auto Repair</span>
+    </a>
+</paper-menu>
+</paper-submenu>
+        
+
+      <a href="emergency.html">
+      <iron-icon icon="maps:local-hospital"></iron-icon>
+      <span>Emergency Help</span>
+      </a>
+
+      <a href="diagnosis.html">
+      <iron-icon icon="settings"></iron-icon>
+      <span>Auto Diagnosis</span>
+      </a>
+
+      <a href="insurance.html">
+      <iron-icon icon="maps:local-atm"></iron-icon>
+      <span>Insurance</span>
+      </a>          
+
+      <a href="rating.html">
+      <iron-icon icon="icons:perm-identity"></iron-icon>
+      <span>Ratings</span>
+      </a>  
+
+</paper-menu>
+</paper-scroll-header-panel>
+
+      <!-- Main Area -->
+      <paper-scroll-header-panel main id="headerPanelMain" condenses keep-condensed-header>
+        <!-- Main Toolbar -->
+        <paper-toolbar id="mainToolbar" class="tall">
+          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
+
+          <span class="space"></span>
+
+          <!-- Toolbar icons -->
+   <!--        <paper-icon-button icon="refresh"></paper-icon-button>
+          <paper-icon-button icon="search"></paper-icon-button> -->
+
+          <!-- Application name -->
+          <div class="middle middle-container">
+            <div class="app-name">SmartDrive</div>
+          </div>
+
+          <!-- Application sub title -->
+          <div class="bottom bottom-container">
+            <div class="bottom-title">Make your Dumb Car Smart</div>
+          </div>
+        </paper-toolbar>
+        <<!-- section -->>
+       
+
+<!-- <div id='outer' style="margin-top:40px; padding:10px">
+    <div id="main" style="width:600px; height:200px; margin: 0px auto; "> -->
+   <!--  <paper-material elevation="1" style+"float:left;height:300px;width:10px;">
+      TN 37 7837834
+    </paper-material> -->
+
+    <!-- <paper-material elevation="1" width="512px" height="162px" > -->
+        <div>
+<br>
+<br>
+<br>
+<br>
+        <div id="div1"></div>
+        <div id="div2"></div> 
+        <div id="div3"></div>
+        </div> 
+  <div>
+  <br>
+  <br>
+  </div>     
+<br>
+<br>
+<br>
+<br>
+      <div>
+        <div id="div4"></div>
+        <div id="div5"></div> 
+        <div id="div6"></div>
+      </div>
+    <!-- </paper-material> -->
+   <!-- <paper-material elevation="1"> -->
+              <!-- <div id="div4" style="float:bottom;"></div> -->
+
+        <!-- <div id="div2"></div> -->
+    <!-- </paper-material> -->
+
+   <!--  <paper-material elevation="1">
+        <div id="div3"></div>
+      
+    </paper-material> -->
+
+  
+<!--     </div>
+</div>
+ -->
+
+
+<script>
+
+    var div1=d3.select(document.getElementById('div1'));
+    var div2=d3.select(document.getElementById('div2'));
+    var div3=d3.select(document.getElementById('div3'));
+
+    var div4=d3.select(document.getElementById('div4'));
+    var div5=d3.select(document.getElementById('div5'));
+    var div6=d3.select(document.getElementById('div6'));
+
+ var pubnub = PUBNUB.init({
+        publish_key: 'pub-c-3588af66-9bbd-4984-b578-27f5877f17db',
+        subscribe_key: 'sub-c-598e4d8e-e9e4-11e4-91d3-0619f8945a4f'
+      });
+
+      //sub
+    var channel = 'Kcteee';
+
+    var cfuel=60;
+    var ckm=5600;
+    var cmilege=22;
+
+    var speed=45;
+    var rpm=2500;
+    var temp=38;
+
+    start();
+
+ 
+    function labelFunction(val,min,max) {
+
+    }
+
+    function deselect() {
+        div1.attr("class","radial");
+        div2.attr("class","radial");
+        div3.attr("class","radial");
+    }
+
+    
+pubnub.subscribe({
+    channel : channel,
+    message : function( message, env, channel ){
+
+        // RECEIVED A MESSAGE.
+        cfuel=message.analog[0];
+        ckm=message.analog[1];
+        cmilege=message.analog[2];
+        // cruntime=message.analog[3];
+        speed=message.analog[3];
+        rpm=message.analog[4];
+        temp=message.analog[5];
+        // var car={
+        //   "general":
+        //       {
+        //         "name":"Ford Figo",
+        //         "number":"TN 37 AJ 4216",
+        //         "owner":"bill gates",
+        //         "fuel":message.analog[0],
+        //         "km":message.analog[1],
+        //         "milege":message.analog[2],
+        //         "runtime":message.analog[3]
+        //       },
+        //   "engine":
+        //       {
+        //         "load":500,
+        //         "rpm":2000,  //message.analog[4]
+        //         "coolant":38
+        //       },
+        //   "other":
+        //       {
+        //     "data1":"blabla",
+        //     "data2": 32.87554
+        //       }
+        // };
+        console.log(cfuel);
+        // carr=car.general.fuel;
+        // kms=car.general.km;
+    }
+    
+});
+
+function start() {
+// setInterval(function(){
+
+ console.log(cfuel,ckm,cmilege,speed,temp,rpm);
+var rp4 = radialProgress(document.getElementById('div4'))
+      .label("TEMPERATURE")
+      // .onClick(onClick1)
+      .diameter(200)
+      .value(temp)
+      .render();
+
+var rp5 = radialProgress(document.getElementById('div5'))
+.label("SPEED")
+// .onClick(onClick1)
+.diameter(200)
+.value(speed)
+.render();
+
+var rp6 = radialProgress(document.getElementById('div6'))
+.label("RPM")
+// .onClick(onClick1)
+.diameter(200)
+.value(rpm)
+.render();
+
+       
+// }, 2000);
+
+       var rp1 = radialProgress(document.getElementById('div1'))
+                .label("FUEL (ltrs) ")
+                // .onClick(onClick1)
+                .diameter(200)
+                .value(cfuel)
+                .render();
+
+        var rp2 = radialProgress(document.getElementById('div2'))
+                .label("KM")
+                // .onClick(onClick2)
+                // .maxValue(20000)
+                .diameter(200)
+                .value(ckm)
+                .render();
+
+        var rp3 = radialProgress(document.getElementById('div3'))
+                .label("MILEGE (km/L)")
+                // .onClick(onClick3)
+                .diameter(200)
+                // .minValue(100)
+                // .maxValue(200)
+                .value(cmilege)
+                .render();
+
+}
+// setInterval(function(){
+// pubnub.publish({
+// channel: channel,
+// message: {
+// eon: {
+// 'Fuel': carr,
+// 'km': kms
+// }
+// }
+// });
+// }, 10);
+
+
+
+
+</script>
+
+
+<!-- </paper-material> -->
+</<!-- section -->>
+
+      </paper-scroll-header-panel>
+    </paper-drawer-panel>
+
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+    </paper-toast>
+
+    <!-- Uncomment next block to enable Service Worker support (1/2) -->
+    <!--
+    <paper-toast id="caching-complete"
+                 duration="6000"
+                 text="Caching complete! This app will work offline.">
+    </paper-toast>
+
+    <platinum-sw-register auto-register
+                          clients-claim
+                          skip-waiting
+                          base-uri="bower_components/platinum-sw/bootstrap"
+                          on-service-worker-installed="displayInstalledToast">
+      <platinum-sw-cache default-cache-strategy="fastest"
+                         cache-config-file="cache-config.json">
+      </platinum-sw-cache>
+    </platinum-sw-register>
+    -->
+
+  </template>
+
+  <!-- build:js scripts/app.js -->
+  <script src="scripts/app.js"></script>
+  <!-- endbuild-->
+</body>
+
+</html>
+
+
+<!-- 
+           <google-chart
+      type="gauge"
+      data='[["Label", "Value"],["Memory", 80],["CPU", 55],["Network", 68]]'
+      options='{"width": 400,
+                "height": 120,
+                "redFrom": 90,
+                "redTo": 100,
+                "yellowFrom":75,
+                "yellowTo": 90,
+                "minorTicks": 5}'>
+  </google-chart>
+  
+  <vaadin-solidgauge-chart id="solid-gauge">
+    <title text=""></title>
+    <pane start-angle="-90" end-angle="90">
+        <background background-color="#EEE" inner-radius="60%" outer-radius="100%"
+                                shape="arc"></background>
+    </pane>
+    <tooltip enabled="false"></tooltip>
+    <y-axis min="0" max="200" line-width="0" minor-tick-width="0" tick-width="0">
+        <stops>0.1, #55BF3B</stops>
+        <stops>0.5, #DDDF0D</stops>
+        <stops>0.9, #DF5353</stops>
+        <title y="-100">Speed</title>
+        <labels enabled="false"></labels>
+    </y-axis>
+    <plot-options>
+        <solidgauge>
+            <data-labels y="5" border-width="0"></data-labels>
+        </solidgauge>
+    </plot-options>
+    <data-series name="Speed">
+        <data>80</data>
+    </data-series>
+</vaadin-solidgauge-chart>
+        </paper-material>
+        </section>
+ -->
+
+        <!-- Main Content -->
+        
+        
+         <!--  <iron-pages attr-for-selected="data-route" selected="{{route}}">
+            <section data-route="home">
+              <paper-material elevation="1">
+                <my-greeting></my-greeting>
+
+                <p class="subhead">You now have:</p>
+                <my-list></my-list>
+
+                <p>Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
+              </paper-material>
+
+              <paper-material elevation="1">
+                <p>This is another card.</p>
+              </paper-material>
+
+              <paper-material elevation="1">
+                <h1 id="license">License</h1>
+                <p>Everything in this repo is BSD style license unless otherwise specified.</p>
+                <p>Copyright (c) 2015 The Polymer Authors. All rights reserved.</p>
+                <p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
+                <ul>
+                <li>Redistributions of source code must retain the above copyright
+                notice, this list of conditions and the following disclaimer.</li>
+                <li>Redistributions in binary form must reproduce the above
+                copyright notice, this list of conditions and the following disclaimer
+                in the documentation and/or other materials provided with the
+                distribution.</li>
+                <li>Neither the name of Google Inc. nor the names of its
+                contributors may be used to endorse or promote products derived from
+                this software without specific prior written permission.</li>
+                </ul>
+                <p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+
+                <div> <a title="Customize this theme" href="/custom-style/?base=dark-side"><paper-button raised="" class="info x-scope paper-button-0" role="button" tabindex="0" aria-disabled="false" pressed="">
+
+    <paper-ripple class="style-scope paper-button" animating="">
+    <div id="background" class="style-scope paper-ripple" style="opacity: 0; background-color: rgb(45, 35, 62);"></div>
+    <div id="waves" class="style-scope paper-ripple"><div class="wave-container style-scope paper-ripple" style="top: -97.6797px; left: 0px; width: 242.734px; height: 242.734px; transform: translate3d(-47.4922px, -3.6875px, 0px);"><div class="wave style-scope paper-ripple" style="opacity: 0.25; transform: scale3d(2.28271, 2.28271, 1); background-color: rgb(45, 35, 62);"></div></div></div>
+  </paper-ripple>
+
+    <paper-material animated="" class="content  style-scope paper-button x-scope paper-material-0" elevation="4">
+    
+       &nbsp;<iron-icon icon="polymer" class="x-scope iron-icon-0"><svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" class="style-scope iron-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;"><g class="style-scope iron-icon"><path d="M19 4h-4L7.11 16.63 4.5 12 9 4H5L.5 12 5 20h4l7.89-12.63L19.5 12 15 20h4l4.5-8z" class="style-scope iron-icon"></path></g></svg>
+  <iron-meta id="meta" type="iconset" class="style-scope iron-icon"></iron-meta>
+  </iron-icon> &nbsp; Customize this theme
+  </paper-material>
+  </paper-button>
+  </a>
+  </div>
+              </paper-material>
+            </section>
+
+            <section data-route="users">
+              <paper-material elevation="1">
+                <h2 class="page-title">Users</h2>
+                <p>This is the users section</p>
+                <a href$="{{baseUrl}}users/Addy">Addy</a><br>
+                <a href$="{{baseUrl}}users/Rob">Rob</a><br>
+                <a href$="{{baseUrl}}users/Chuck">Chuck</a><br>
+                <a href$="{{baseUrl}}users/Sam">Sam</a>
+              </paper-material>
+            </section>
+
+            <section data-route="user-info">
+              <paper-material elevation="1">
+                <h2 class="page-title">User: {{params.name}}</h2>
+                <div>This is {{params.name}}'s section</div>
+              </paper-material>
+            </section>
+
+            <section data-route="contact">
+              <paper-material elevation="1">
+                <h2 class="page-title">Contact</h2>
+                <p>This is the contact section</p>
+              </paper-material>
+            </section>
+          </iron-pages>
+        </div> -->
